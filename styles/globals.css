@@ -1,0 +1,148 @@
+/* globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap&subset=vietnamese');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Colors */
+  --teal: #00D4B4;
+  --teal-dark: #00A896;
+  --teal-glow: rgba(0, 212, 180, 0.15);
+  --amber: #F59E0B;
+  --coral: #FF6B6B;
+  --purple: #8B5CF6;
+
+  /* Light mode */
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F3F4F6;
+  --bg-surface: rgba(0, 0, 0, 0.02);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 212, 180, 0.4);
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-hover: 0 8px 24px rgba(0,0,0,0.12);
+  --shadow-teal: 0 0 0 1px rgba(0,212,180,0.3), 0 8px 32px rgba(0,212,180,0.12);
+}
+
+.dark {
+  --bg-primary: #050508;
+  --bg-secondary: #0D0D14;
+  --bg-tertiary: #111118;
+  --bg-surface: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(0, 212, 180, 0.4);
+  --text-primary: #E2E8F0;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-hover: 0 8px 24px rgba(0,0,0,0.6);
+  --shadow-teal: 0 0 0 1px rgba(0,212,180,0.3), 0 8px 32px rgba(0,212,180,0.12);
+}
+
+/* Apply theme */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-be-vietnam), 'Be Vietnam Pro', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-be-vietnam), 'Be Vietnam Pro', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+code, pre, .font-mono {
+  font-family: 'DM Mono', monospace;
+}
+
+/* Grid texture overlay */
+.grid-texture::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Teal aurora glow (dark mode hero) */
+.aurora-bg {
+  background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 212, 180, 0.08) 0%, transparent 70%);
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, var(--teal) 40%, rgba(0,212,180,0.5) 60%, var(--teal) 80%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* Page transition */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.page-enter { animation: fadeSlideIn 220ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+.tab-enter  { animation: tabFadeIn 180ms ease-out forwards; }
+
+/* Glow pulse on CTA */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 180, 0.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(0, 212, 180, 0); }
+}
+
+.glow-pulse { animation: glowPulse 2.5s ease-in-out infinite; }
+
+/* Count up animation handled in JS */
+
+/* Staggered reveal */
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: 60ms; }
+.stagger-3 { animation-delay: 120ms; }
+.stagger-4 { animation-delay: 180ms; }
+.stagger-5 { animation-delay: 240ms; }
+.stagger-6 { animation-delay: 300ms; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* Circuit trace SVG background for landing/auth */
+.circuit-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpath d='M10 10 L90 10 L90 90 M30 10 L30 50 L70 50 L70 90 M50 50 L50 30' fill='none' stroke='%2300D4B4' stroke-width='0.5' opacity='0.06'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%2300D4B4' opacity='0.08'/%3E%3Ccircle cx='90' cy='10' r='2' fill='%2300D4B4' opacity='0.08'/%3E%3Ccircle cx='30' cy='50' r='2' fill='%2300D4B4' opacity='0.08'/%3E%3Ccircle cx='70' cy='50' r='2' fill='%2300D4B4' opacity='0.08'/%3E%3C/svg%3E");
+  background-size: 100px 100px;
+}

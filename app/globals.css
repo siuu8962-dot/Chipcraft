@@ -1,0 +1,99 @@
+/* ══ CHIPCRAFT GLOBAL STYLES ══ */
+
+@import "tailwindcss";
+
+:root {
+  /* Colors */
+  --teal: #00D4B4;
+  --teal-dark: #00A896;
+  --teal-glow: rgba(0, 212, 180, 0.15);
+  --amber: #F59E0B;
+  --coral: #FF6B6B;
+  --purple: #8B5CF6;
+
+  /* Light mode default */
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F3F4F6;
+  --bg-surface: rgba(0, 0, 0, 0.02);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 212, 180, 0.4);
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.dark {
+  --bg-primary: #050508;
+  --bg-secondary: #0D0D14;
+  --bg-tertiary: #111118;
+  --bg-surface: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(0, 212, 180, 0.4);
+  --text-primary: #E2E8F0;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+/* --- Shared Utilities --- */
+.card-redesign {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #7C3AED, #A855F7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* --- Toast Redesign --- */
+.chip-toast {
+  background: rgba(15, 23, 42, 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(124, 58, 237, 0.2) !important;
+  color: #E2E8F0 !important;
+  border-radius: 12px !important;
+  padding: 12px 20px !important;
+  font-family: 'Be Vietnam Pro', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  max-width: 400px !important;
+}
+
+.chip-toast-success { border-left: 4px solid #10B981 !important; }
+.chip-toast-error { border-left: 4px solid #EF4444 !important; }
+
+@keyframes toast-slide-in {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-toast-in { animation: toast-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
