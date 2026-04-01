@@ -57,7 +57,7 @@ export function LessonSidebar({ course, currentLessonId, completedLessonIds }: L
   }
 
   return (
-    <div data-sidebar-alt className="lesson-sidebar custom-scrollbar" style={{ width: 280, minWidth: 280, background: 'var(--bg-secondary)', borderRight: '1px solid var(--border)', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+    <div data-sidebar-alt className="lesson-sidebar custom-scrollbar" style={{ width: '100%', height: '100%', background: 'var(--bg-secondary)', borderRight: '1px solid var(--border)', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
       <div style={{ padding: '24px 20px', borderBottom: '1px solid var(--border)' }}>
         <div style={{ fontSize: 10, color: '#475569', textTransform: 'uppercase', letterSpacing: 1.2, marginBottom: 8, fontWeight: 700 }}>Khóa học</div>
         <Link href={`/courses/${course.slug}`} className="hover:underline">

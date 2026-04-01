@@ -38,7 +38,7 @@ export default function StandaloneAITutorPage() {
   const [activeTab, setActiveTab] = useState<'chat' | 'agent'>('chat')
   const [userId, setUserId] = useState<string | null>(null)
   const [aiUsage, setAiUsage] = useState<any>(null)
-  const [mobileView, setMobileView] = useState<'history' | 'chat' | 'context'>('chat')
+  const [mobileView, setMobileView] = useState<'history' | 'chat' | 'agent' | 'context'>('chat')
   const supabase = createClient()
 
   useEffect(() => {
@@ -170,31 +170,24 @@ export default function StandaloneAITutorPage() {
   return (
     <div style={{
       flex: 1,
-      display: 'flex',
       overflow: 'hidden',
       minHeight: 0,
       backgroundColor: 'var(--bg-primary)',
-      flexDirection: 'row'
-    }} className="flex-col md:flex-row">
+    }} className="flex flex-col md:flex-row">
       {/* CONVERSATION HISTORY PANEL */}
       <div 
         data-sidebar-alt
         className={cn(
-          "transition-all duration-300 md:relative",
-          mobileView === 'history' ? "flex w-full" : "hidden md:flex"
+          "transition-all duration-300 md:relative flex-col gap-2 p-4",
+          mobileView === 'history' ? "flex w-full h-full" : "hidden md:flex"
         )}
         style={{
           width: '240px',
           minWidth: '240px',
           flexShrink: 0,
-          height: '100%',
-          overflowY: 'auto',
           borderRight: '1px solid var(--border)',
           backgroundColor: 'var(--bg-secondary)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '8px',
-          padding: '16px 12px'
+          overflowY: 'auto',
         }}>
         <button 
           onClick={startNewChat}
@@ -301,13 +294,18 @@ export default function StandaloneAITutorPage() {
             flex: 1
           }}>
             {[
-              { id: 'history', icon: Clock, label: 'Sử' },
+              { id: 'history', icon: Clock, label: 'Lịch sử' },
               { id: 'chat', icon: MessageSquare, label: 'Chat' },
+              { id: 'agent', icon: Zap, label: 'Agent' },
               { id: 'context', icon: Sparkles, label: 'Cảnh' }
             ].map(v => (
               <button
                 key={v.id}
-                onClick={() => setMobileView(v.id as any)}
+                onClick={() => {
+                  setMobileView(v.id as any);
+                  if (v.id === 'chat') setActiveTab('chat');
+                  if (v.id === 'agent') setActiveTab('agent');
+                }}
                 style={{
                   flex: 1,
                   display: 'flex',
@@ -386,7 +384,7 @@ export default function StandaloneAITutorPage() {
         </div>
 
         {/* Scrollable content area */}
-        <div data-theme-area="main" className={cn("flex-1 overflow-y-auto", mobileView !== 'chat' && "hidden md:block")}>
+        <div data-theme-area="main" className={cn("flex-1 overflow-y-auto", (mobileView !== 'chat' && mobileView !== 'agent') && "hidden md:block")}>
           {activeTab === 'chat' ? (
             <AITutor 
               key={activeId || 'new'} 
@@ -404,21 +402,16 @@ export default function StandaloneAITutorPage() {
       {/* RIGHT PANEL */}
       <div 
         className={cn(
-          "transition-all duration-300 md:relative",
-          mobileView === 'context' ? "flex w-full" : "hidden md:flex"
+          "transition-all duration-300 md:relative flex-col gap-5 p-5",
+          mobileView === 'context' ? "flex w-full h-full" : "hidden md:flex"
         )}
         style={{
           width: '280px',
           minWidth: '280px',
           flexShrink: 0,
-          height: '100%',
-          overflowY: 'auto',
           borderLeft: '1px solid var(--border)',
           backgroundColor: 'var(--bg-secondary)',
-          padding: '20px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px'
+          overflowY: 'auto',
         }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{ width: '36px', height: '36px', borderRadius: '10px', backgroundColor: 'rgba(124, 58, 237, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

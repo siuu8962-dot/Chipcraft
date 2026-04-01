@@ -24,17 +24,12 @@ export default async function DashboardLayout({ children }: { children: React.Re
       {/* Main Area */}
       <div 
         className="flex-1 min-w-0 flex flex-col min-h-screen bg-[var(--bg-primary)] transition-all duration-300"
-        style={{
-          marginLeft: '0px', // Default mobile
-        }}
       >
         <div style={{
           display: 'flex',
           flexDirection: 'column',
           flex: 1,
           width: '100%',
-          // On desktop, add padding-left to clear the fixed sidebar
-          paddingLeft: '0px',
         }} className="md:pl-[210px]">
           <Topbar user={user} profile={profile} />
           <main data-theme-area="main" style={{

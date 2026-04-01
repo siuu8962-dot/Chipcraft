@@ -10,6 +10,7 @@ import { LabPanel } from '@/components/lab/LabPanel'
 import { QuizCard } from '@/components/quiz/QuizCard'
 import { AITutor } from '@/components/ai/AITutor'
 import { Loader2 as Spinner } from 'lucide-react'
+import { cn } from '@/lib/utils'
 import toast from 'react-hot-toast'
 
 const BookOpenIcon = () => (
@@ -102,6 +103,7 @@ export default function LessonPlayerPage() {
   const [activeTab, setActiveTab] = useState('lesson')
   const [user, setUser] = useState<any>(null)
   const [completedLessonIds, setCompletedLessonIds] = useState<string[]>([])
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const supabase = createClient()
 
   useEffect(() => {
@@ -196,7 +198,7 @@ export default function LessonPlayerPage() {
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: `
-        .lesson-page { display: flex; height: calc(100vh - 64px); overflow: hidden; background: var(--bg-primary); }
+        .lesson-page { display: flex; height: calc(100vh - 64px); overflow: hidden; background: var(--bg-primary); position: relative; }
         .lesson-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
         .lesson-header { padding: 20px 32px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--bg-primary); flex-shrink: 0; gap: 16px; }
         .lesson-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); background: var(--bg-secondary); flex-shrink: 0; padding: 0 32px; overflow-x: auto; }
@@ -210,20 +212,50 @@ export default function LessonPlayerPage() {
         .tab-item { padding: 14px 20px; font-size: 13px; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; display: flex; align-items: center; gap: 8px; transition: all 0.15s; white-space: nowrap; font-weight: 700; }
         .tab-item:hover { color: var(--text-secondary); }
         .tab-item.active { color: #A855F7; border-bottom-color: #7C3AED; background: rgba(124, 58, 237, 0.05); }
+
+        @media (max-width: 768px) {
+          .lesson-header { padding: 16px; flex-direction: column; align-items: flex-start; gap: 12px; }
+          .lesson-header h1 { fontSize: 22px !important; margin-bottom: 4px !important; }
+          .complete-btn { width: 100%; text-align: center; }
+          .lesson-tabs { padding: 0 16px; }
+          .lesson-content-area { padding: 20px 16px; }
+        }
       `}} />
       <div className="lesson-page">
         {user && lesson && (
           <StudyTimeTracker userId={user.id} lessonId={lesson.id} />
         )}
-        <LessonSidebar 
-          course={course} 
-          currentLessonId={lesson.id} 
-          completedLessonIds={completedLessonIds}
-        />
+        {/* Sidebar with Toggle logic for mobile */}
+        <div className={cn(
+          "transition-transform duration-300 fixed inset-0 z-50 md:relative md:translate-x-0",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        )}>
+          {/* Overlay to close on mobile */}
+          <div 
+            className="absolute inset-0 bg-black/60 md:hidden" 
+            onClick={() => setSidebarOpen(false)}
+          />
+          <LessonSidebar 
+            course={course} 
+            currentLessonId={lesson.id} 
+            completedLessonIds={completedLessonIds}
+          />
+        </div>
 
         <div className="lesson-main">
           {/* Header Zone */}
           <div data-theme-area="main" className="lesson-header">
+            {/* Mobile Sidebar Toggle */}
+            <button 
+              onClick={() => setSidebarOpen(true)}
+              className="md:hidden mr-2 p-2 rounded-lg bg-var(--bg-secondary) border border-var(--border)"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
             <div style={{ minWidth: 0 }}>
               <div style={{ fontSize: 11, color: '#475569', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5, fontWeight: 700 }}>
                 ĐANG HỌC
