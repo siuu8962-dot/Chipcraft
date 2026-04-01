@@ -56,11 +56,9 @@ export default function RegisterPage() {
         width: '45%', minHeight: '100vh',
         background: 'linear-gradient(135deg, var(--bg-primary) 0%, #0a0a14 100%)',
         borderRight: '1px solid var(--border)',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
         padding: '60px 48px',
         position: 'relative', overflow: 'hidden',
-      }} className="hidden lg:flex">
+      }} className="hidden lg:flex flex-col items-center justify-center">
         {/* Circuit bg */}
         <div style={{
           position: 'absolute', inset: 0,
@@ -154,10 +152,21 @@ export default function RegisterPage() {
       {/* RIGHT - Form panel */}
       <div style={{
         flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: '48px 40px',
+        padding: '32px 24px',
         overflowY: 'auto',
-      }}>
+      }} className="md:p-12">
         <div style={{ width: '100%', maxWidth: 420 }}>
+          {/* Mobile Logo Only */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginBottom: 40 }} className="lg:hidden">
+            <div style={{
+              width: 32, height: 32, borderRadius: 8,
+              background: 'rgba(0,212,180,0.15)', border: '1px solid rgba(0,212,180,0.3)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <CircuitBoard size={18} color="#00D4B4" />
+            </div>
+            <span style={{ fontFamily: '"DM Mono"', fontWeight: 600, fontSize: 18, color: '#E2E8F0' }}>ChipCraft</span>
+          </div>
 
           {success ? (
             // Success state
@@ -178,8 +187,8 @@ export default function RegisterPage() {
             </div>
           ) : (
             <>
-              <div style={{ marginBottom: 32 }}>
-                <h1 style={{ fontFamily: '"Be Vietnam Pro"', fontWeight: 800, fontSize: 30, color: '#E2E8F0', letterSpacing: '-0.02em', marginBottom: 8 }}>
+              <div style={{ marginBottom: 32 }} className="text-center lg:text-left">
+                <h1 style={{ fontFamily: '"Be Vietnam Pro"', fontWeight: 800, fontSize: 'clamp(24px, 5vw, 30px)', color: '#E2E8F0', letterSpacing: '-0.02em', marginBottom: 8 }}>
                   Bắt đầu học ngay!
                 </h1>
                 <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>

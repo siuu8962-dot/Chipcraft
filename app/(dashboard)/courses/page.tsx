@@ -71,11 +71,11 @@ const LEVEL_FILTER_OPTIONS = [
 // --- Skeleton ------------------------------------------------------------------------
 function SkeletonCards() {
   return (
-    <div style={{ padding: '32px', maxWidth: 1200, margin: '0 auto' }}>
-      <div className="skeleton" style={{ height: 90, marginBottom: 40, borderRadius: 12 }} />
-      <div style={{ display: 'grid', gridTemplateColumns: '240px 1fr', gap: 32 }}>
-        <div className="skeleton" style={{ height: 420, borderRadius: 12 }} />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+    <div style={{ padding: '16px', maxWidth: 1200, margin: '0 auto' }} className="md:p-8">
+      <div className="skeleton" style={{ height: 60, marginBottom: 24, borderRadius: 12 }} />
+      <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-6 md:gap-8">
+        <div className="skeleton hidden lg:block" style={{ height: 420, borderRadius: 12 }} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="skeleton" style={{ height: 300, borderRadius: 12 }} />
           ))}
@@ -188,24 +188,32 @@ export default function CoursesPage() {
 
   // -- Render -------------------------------------------------------------------------
   return (
-    <div data-theme-area="main" style={{ padding: '32px', maxWidth: 1200, margin: '0 auto', backgroundColor: 'var(--bg-primary)', minHeight: '100vh' }}>
+    <div data-theme-area="main" style={{ 
+      padding: '16px', 
+      maxWidth: 1200, 
+      margin: '0 auto', 
+      backgroundColor: 'var(--bg-primary)', 
+      minHeight: '100vh' 
+    }} className="md:p-8">
 
       {/* Header */}
-      <div className="page-header" style={{ marginBottom: 40 }}>
-        <p className="label-caps" style={{ color: '#7C3AED', marginBottom: 8 }}>
+      <div className="page-header mb-6 md:mb-10">
+        <p style={{ fontSize: 10, fontWeight: 700, color: '#7C3AED', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 6 }}>
           Thư viện tri thức
         </p>
-        <h1 style={{ fontSize: 32, margin: '0 0 12px', color: 'var(--text-primary)' }}>Khóa học thiết kế chip</h1>
-        <p className="subtitle" style={{ margin: 0, color: 'var(--text-secondary)' }}>
+        <h1 style={{ fontSize: 24, margin: '0 0 8px', color: 'var(--text-primary)', fontWeight: 800 }} className="md:text-3xl">
+          Khóa học thiết kế chip
+        </h1>
+        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: 13, lineHeight: 1.5 }} className="md:text-sm">
           Lộ trình từ Digital Logic cơ bản đến AI Chip Architecture chuyên sâu.
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '240px 1fr', gap: 32, alignItems: 'start' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-6 md:gap-8 items-start">
 
         {/* -- Filter Sidebar -- */}
-        <aside className="animate-fade-up" style={{ animationDelay: '100ms', position: 'sticky', top: 80 }}>
-          <div className="card-redesign" style={{ padding: '24px' }}>
+        <aside className="animate-fade-up lg:sticky lg:top-20" style={{ animationDelay: '100ms' }}>
+          <div className="card-redesign p-5 md:p-6">
 
             {/* Category */}
             <div className="label-caps" style={{ marginBottom: 20 }}>Chủ đề</div>
@@ -305,35 +313,35 @@ export default function CoursesPage() {
         </aside>
 
         {/* -- Course Grid -- */}
-        <div>
+        <div style={{ width: '100%' }}>
           {filtered.length === 0 ? (
             /* Empty State */
             <div data-theme-area="card" style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center',
-              justifyContent: 'center', padding: '80px 40px',
+              justifyContent: 'center', padding: '60px 20px',
               background: 'var(--bg-surface)', borderRadius: 16,
               border: '1px dashed var(--border)',
-            }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>
+            }} className="md:p-20">
+              <div style={{ fontSize: 40, marginBottom: 12 }}>🔍</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6 }} className="md:text-lg">
                 Chưa có khóa học nào
               </div>
-              <div style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 20 }}>
+              <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 16, textAlign: 'center' }} className="md:text-sm">
                 Thử thay đổi bộ lọc để xem thêm khóa học.
               </div>
               <button
                 onClick={() => { setSelectedCategory('all'); setSelectedLevels([]) }}
                 style={{
-                  height: 40, padding: '0 20px', borderRadius: 8,
+                  height: 38, padding: '0 16px', borderRadius: 8,
                   background: 'rgba(124, 58, 237, 0.12)', border: '1px solid #7C3AED',
-                  color: '#A855F7', fontWeight: 700, fontSize: 14, cursor: 'pointer',
+                  color: '#A855F7', fontWeight: 700, fontSize: 13, cursor: 'pointer',
                 }}
               >
                 Xem tất cả khóa học
               </button>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
               {filtered.map((course, i) => {
                 const theme = DIFFICULTY_MAP[course.difficulty_level] ?? DIFFICULTY_MAP.Beginner
                 return (

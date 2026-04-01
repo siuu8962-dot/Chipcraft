@@ -321,14 +321,14 @@ export default function LandingPage() {
         <div style={{ flex: 1 }}>
           <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
             <div style={{
-              width: 32, height: 32, borderRadius: 8,
+              width: 28, height: 28, borderRadius: 8,
               background: 'rgba(0,212,180,0.15)',
               border: '1px solid rgba(0,212,180,0.3)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <CircuitBoard size={18} color="#00D4B4" />
+            }} className="md:w-8 md:h-8">
+              <CircuitBoard size={16} color="#00D4B4" className="md:w-[18px] md:h-[18px]" />
             </div>
-            <span style={{ fontFamily: '"Be Vietnam Pro", sans-serif', fontWeight: 700, fontSize: 18, color: '#E2E8F0', letterSpacing: '-0.02em' }}>
+            <span style={{ fontFamily: '"Be Vietnam Pro", sans-serif', fontWeight: 700, fontSize: 16, color: '#E2E8F0', letterSpacing: '-0.02em' }} className="md:text-lg">
               ChipCraft
             </span>
           </Link>
@@ -336,8 +336,8 @@ export default function LandingPage() {
 
         {/* Center nav  desktop only */}
         <div style={{
-          display: 'flex', gap: '32px', position: 'absolute', left: '50%', transform: 'translateX(-50%)'
-        }} className="hidden md:flex">
+          gap: '32px', position: 'absolute', left: '50%', transform: 'translateX(-50%)'
+        }} className="hidden md:flex items-center">
           {['Khóa học', 'Pricing', 'Cộng đồng', 'Blog'].map(item => (
             <Link key={item} href="#"
               className="hover:text-teal transition-colors"
@@ -349,7 +349,7 @@ export default function LandingPage() {
         </div>
 
         {/* Right CTAs */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: 1, justifyContent: 'flex-end' }} className="hidden md:flex">
+        <div style={{ alignItems: 'center', gap: '16px', flex: 1, justifyContent: 'flex-end' }} className="hidden md:flex">
           <Link href="/login"
             style={{
               fontSize: 14, fontWeight: 600, color: 'var(--text-secondary)', textDecoration: 'none',
@@ -376,7 +376,7 @@ export default function LandingPage() {
         {/* Mobile menu button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#E2E8F0', cursor: 'pointer' }}
+          style={{ background: 'none', border: 'none', color: '#E2E8F0', cursor: 'pointer', padding: 8 }}
           className="flex md:hidden"
         >
           {menuOpen ? <X size={24} /> : <List size={24} />}
@@ -387,17 +387,40 @@ export default function LandingPage() {
           <div style={{
             position: 'absolute', top: 64, left: 0, right: 0,
             background: 'rgba(5,5,8,0.98)', borderBottom: '1px solid var(--border)',
-            padding: '24px 40px',
+            padding: '24px 20px',
             display: 'flex', flexDirection: 'column', gap: '20px',
-          }} className="md:hidden">
+            boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+            zIndex: 101,
+            backdropFilter: 'blur(20px)'
+          }} className="md:hidden animate-in fade-in slide-in-from-top-4 duration-200">
             {['Khóa học', 'Pricing', 'Cộng đồng', 'Blog'].map(item => (
-              <Link key={item} href="#" style={{ color: '#E2E8F0', textDecoration: 'none', fontSize: 15 }}>
+              <Link key={item} href="#" style={{ color: '#E2E8F0', textDecoration: 'none', fontSize: 16, fontWeight: 500, padding: '4px 0' }}>
                 {item}
               </Link>
             ))}
-            <hr style={{ border: 'none', borderTop: '1px solid var(--border)' }} />
-            <Link href="/login" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Đăng nhập</Link>
-            <Link href="/register" className="btn-primary" style={{ justifyContent: 'center' }}>Bắt đầu free</Link>
+            <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '4px 0' }} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <Link href="/login" style={{ 
+                color: 'var(--text-secondary)', 
+                textDecoration: 'none', 
+                fontSize: 16, 
+                fontWeight: 600,
+                textAlign: 'center',
+                padding: '12px',
+                borderRadius: '10px',
+                border: '1px solid var(--border)'
+              }}>Đăng nhập</Link>
+              <Link href="/register" style={{ 
+                background: '#00D4B4',
+                color: '#000',
+                textDecoration: 'none',
+                fontWeight: 700,
+                textAlign: 'center',
+                padding: '14px',
+                borderRadius: '10px',
+                boxShadow: '0 4px 12px rgba(0,212,180,0.2)'
+              }}>Bắt đầu free</Link>
+            </div>
           </div>
         )}
       </nav>
@@ -422,7 +445,6 @@ export default function LandingPage() {
           maxWidth: 1200, margin: '0 auto', padding: '0 40px',
           width: '100%',
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',   // LEFT content + RIGHT code card
           gap: '64px',
           alignItems: 'center',
         }} className="grid-cols-1 lg:grid-cols-2">
@@ -446,8 +468,8 @@ export default function LandingPage() {
             <div className="animate-entrance" style={{ animationDelay: '0.2s' }}>
               <h1 style={{
                 fontFamily: '"Be Vietnam Pro"', fontWeight: 900,
-                fontSize: 'clamp(52px, 7vw, 84px)',
-                lineHeight: 1, letterSpacing: '-0.04em',
+                fontSize: 'clamp(36px, 8vw, 84px)',
+                lineHeight: 1.1, letterSpacing: '-0.04em',
                 color: '#FFFFFF', marginBottom: 16,
                 textShadow: '0 0 30px rgba(255,255,255,0.15)'
               }}>
@@ -458,8 +480,8 @@ export default function LandingPage() {
             <div className="animate-entrance" style={{ animationDelay: '0.4s' }}>
               <h1 className="animate-text-glow" style={{
                 fontFamily: '"Be Vietnam Pro"', fontWeight: 900,
-                fontSize: 'clamp(52px, 7vw, 84px)',
-                lineHeight: 1, letterSpacing: '-0.04em',
+                fontSize: 'clamp(36px, 8vw, 84px)',
+                lineHeight: 1.1, letterSpacing: '-0.04em',
                 background: 'linear-gradient(135deg, #00D4B4 10%, #3B82F6 90%)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
                 marginBottom: 24,
@@ -471,20 +493,20 @@ export default function LandingPage() {
 
             {/* Subtitle */}
             <p style={{
-              fontSize: 18, fontWeight: 400, color: 'var(--text-secondary)',
-              lineHeight: 1.7, marginBottom: 36, maxWidth: 480,
+              fontSize: 'clamp(15px, 2vw, 18px)', fontWeight: 400, color: 'var(--text-secondary)',
+              lineHeight: 1.7, marginBottom: 32, maxWidth: 480,
             }}>
               Học Verilog, RTL Design và ASIC flow với AI giải thích từng dòng code.
               Thực hành ngay trên trình duyệt – không cần cài đặt EDA phức tạp.
             </p>
 
             {/* CTA Row */}
-            <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginBottom: 32, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginBottom: 32, flexWrap: 'wrap' }} className="justify-center lg:justify-start">
               <Link href="/register" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
-                height: 56, padding: '0 32px', borderRadius: 14,
+                height: 52, padding: '0 24px', borderRadius: 12,
                 background: '#00D4B4', color: '#000000',
-                fontWeight: 800, fontSize: 16, textDecoration: 'none',
+                fontWeight: 800, fontSize: 15, textDecoration: 'none',
                 whiteSpace: 'nowrap',
                 boxShadow: '0 0 0 0 rgba(0,212,180,0.5)',
                 animation: 'glowPulse 2.5s ease-in-out infinite',
@@ -492,14 +514,15 @@ export default function LandingPage() {
               }}
               onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)'}
               onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(0)'}
+              className="md:h-14 md:px-8 md:text-base"
               >
                 Bắt đầu học miễn phí →
               </Link>
               <a href="#demo" style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
-                height: 56, padding: '0 28px', borderRadius: 14,
+                height: 52, padding: '0 24px', borderRadius: 12,
                 background: 'transparent', border: '1.5px solid rgba(255,255,255,0.15)',
-                color: '#E2E8F0', fontWeight: 600, fontSize: 15, textDecoration: 'none',
+                color: '#E2E8F0', fontWeight: 600, fontSize: 14, textDecoration: 'none',
                 whiteSpace: 'nowrap', transition: 'border-color 0.15s, color 0.15s',
               }}
               onMouseEnter={e => {
@@ -512,6 +535,7 @@ export default function LandingPage() {
                 el.style.borderColor = 'rgba(255,255,255,0.15)'
                 el.style.color = '#E2E8F0'
               }}
+              className="md:h-14 md:px-7 md:text-base"
               >
                 ▶ Xem demo video
               </a>
@@ -571,37 +595,40 @@ export default function LandingPage() {
         padding: '0',
       }}>
         <div style={{
-          maxWidth: 1200, margin: '0 auto', padding: '0 40px',
-        }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr 1fr',
-          }} className="stats-grid">
+          maxWidth: 1200, margin: '0 auto', padding: '0 20px',
+        }} className="md:px-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
             {[
-              { value: '2,847', label: 'Học viên đang học', suffix: '' },
-              { value: '6', label: 'Khóa học chuyên sâu', suffix: '' },
-              { value: '50', label: 'Bài lab thực hành', suffix: '+' },
-              { value: '4.9', label: 'Đánh giá trung bình', suffix: '★' },
+              { value: '2,847', label: 'Học viên', suffix: '' },
+              { value: '6', label: 'Khóa học', suffix: '' },
+              { value: '50', label: 'Bài lab', suffix: '+' },
+              { value: '4.9', label: 'Đánh giá', suffix: '★' },
             ].map((stat, i) => (
               <div key={i} style={{
-                padding: '40px 28px',
+                padding: '24px 16px',
                 textAlign: 'center',
-                borderRight: i < 3 ? '1px solid var(--border)' : 'none',
+                borderRight: (i % 2 === 0 || i < 2) ? '1px solid var(--border)' : 'none',
+                borderBottom: i < 2 ? '1px solid var(--border)' : 'none',
                 position: 'relative',
-              }}>
+              }} className="md:p-10 lg:border-bottom-0 lg:border-right-[1px] lg:[&:last-child]:border-right-0">
+                <style jsx>{`
+                  @media (min-width: 1024px) {
+                    div { border-bottom: none !important; border-right: ${i < 3 ? '1px solid var(--border)' : 'none'} !important; }
+                  }
+                `}</style>
                 <div style={{
                   fontFamily: '"Be Vietnam Pro", sans-serif',
                   fontWeight: 800,
-                  fontSize: 40,
+                  fontSize: 'clamp(24px, 4vw, 40px)',
                   color: '#FFFFFF',
                   lineHeight: 1,
-                  marginBottom: 10,
+                  marginBottom: 8,
                   letterSpacing: '-0.02em',
                 }}>
-                  {stat.value}<span style={{ color: '#00D4B4', fontSize: 32 }}>{stat.suffix}</span>
+                  {stat.value}<span style={{ color: '#00D4B4', fontSize: '0.8em' }}>{stat.suffix}</span>
                 </div>
                 <div style={{
-                  fontSize: 14,
+                  fontSize: 'clamp(11px, 2vw, 14px)',
                   fontWeight: 500,
                   color: 'var(--text-muted)',
                   letterSpacing: '0.01em',
@@ -624,13 +651,7 @@ export default function LandingPage() {
             <p className="text-[var(--text-muted)] max-w-2xl mx-auto text-lg">Chu trình học tập khép kín: Lý thuyết → Thực hành → AI Feedback.</p>
           </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '20px',
-          marginTop: '64px',
-        }} className="features-grid"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 md:mt-16">
           {[
             {
               icon: <Sparkle size={22} color="#00D4B4" weight="duotone" />,
@@ -726,14 +747,7 @@ export default function LandingPage() {
             }}>thế hệ mới</span>
           </h2>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '20px',
-            marginTop: '48px',
-            alignItems: 'start',
-          }} className="curriculum-grid"
-          >
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-12 items-start">
             {/* Stage 1 */}
             <div className="animate-target stagger-1 group" style={{
               background: 'rgba(0,212,180,0.02)',
@@ -875,8 +889,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section id="pricing" style={{ padding: '160px 0', position: 'relative' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 40px', textAlign: 'center' }}>
+      <section id="pricing" style={{ padding: '80px 0', position: 'relative' }} className="md:py-40">
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }} className="md:px-10">
           <div className="flex flex-col items-center mb-16 animate-target">
             <div style={{ 
               fontSize: 12, fontWeight: 800, color: '#00D4B4', 
@@ -939,14 +953,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-          <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
-          gap: '20px',
-          maxWidth: 1000,
-          margin: '48px auto 0',
-          alignItems: 'start',
-        }} className="pricing-grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 md:mt-12 max-w-[1000px] mx-auto items-start">
 
           {/* ?? FREE ?? */}
           <div style={{
@@ -1126,8 +1133,8 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section id="testimonials" style={{ padding: '160px 0', position: 'relative', background: 'rgba(255,255,255,0.01)' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 40px', textAlign: 'center' }}>
+      <section id="testimonials" style={{ padding: '80px 0', position: 'relative', background: 'rgba(255,255,255,0.01)' }} className="md:py-40">
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px', textAlign: 'center' }} className="md:px-10">
           <div className="flex flex-col items-center mb-16 animate-target">
             <div style={{ 
               fontSize: 12, fontWeight: 800, color: '#8B5CF6', 
@@ -1142,12 +1149,7 @@ export default function LandingPage() {
             }}>Câu chuyện thành công</h2>
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gap: '20px',
-            marginTop: '56px',
-          }} className="testimonials-grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 md:mt-14">
             {[
               {
                 initials: 'NT', color: '#00D4B4', bgColor: 'rgba(0,212,180,0.12)',
@@ -1229,18 +1231,11 @@ export default function LandingPage() {
       <footer style={{
         background: 'rgba(0,0,0,0.4)',
         borderTop: '1px solid var(--border)',
-        padding: '72px 0 32px',
-      }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 40px' }}>
+        padding: '60px 0 32px',
+      }} className="md:pt-[72px]">
+        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 20px' }} className="md:px-10">
           
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '2fr 1fr 1fr 1fr',
-            gap: '48px',
-            paddingBottom: '48px',
-            borderBottom: '1px solid var(--border)',
-            marginBottom: '32px',
-          }} className="footer-grid">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-10 md:gap-12 pb-10 md:pb-12 border-b border-[var(--border)] mb-8">
             
             {/* Col 1: Brand */}
             <div>
@@ -1328,9 +1323,9 @@ export default function LandingPage() {
           </div>
 
           {/* Bottom bar */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, paddingTop: 32 }}>
-            <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-               2025 ChipCraft  <Link href="/privacy" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500, transition: 'color 0.15s' }} onMouseEnter={e => e.currentTarget.style.color = '#00D4B4'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>Chính sách bảo mật</Link>  <Link href="/terms" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500, transition: 'color 0.15s' }} onMouseEnter={e => e.currentTarget.style.color = '#00D4B4'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>Điều khoản dịch vụ</Link>  Made in Vietnam 🇻🇳
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24, paddingTop: 32 }} className="flex-col md:flex-row md:gap-4">
+            <span style={{ fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }} className="md:text-left">
+               2025 ChipCraft | <Link href="/privacy" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500, transition: 'all 0.15s' }}>Chính sách bảo mật</Link> | <Link href="/terms" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: 500, transition: 'all 0.15s' }}>Điều khoản dịch vụ</Link> | Made in Vietnam 🇻🇳
             </span>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#00D4B4', boxShadow: '0 0 8px rgba(0,212,180,0.4)', animation: 'pulse 2s infinite' }} />

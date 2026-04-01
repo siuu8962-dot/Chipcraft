@@ -38,6 +38,7 @@ export default function StandaloneAITutorPage() {
   const [activeTab, setActiveTab] = useState<'chat' | 'agent'>('chat')
   const [userId, setUserId] = useState<string | null>(null)
   const [aiUsage, setAiUsage] = useState<any>(null)
+  const [mobileView, setMobileView] = useState<'history' | 'chat' | 'context'>('chat')
   const supabase = createClient()
 
   useEffect(() => {
@@ -172,11 +173,16 @@ export default function StandaloneAITutorPage() {
       display: 'flex',
       overflow: 'hidden',
       minHeight: 0,
-      backgroundColor: 'var(--bg-primary)'
-    }}>
+      backgroundColor: 'var(--bg-primary)',
+      flexDirection: 'row'
+    }} className="flex-col md:flex-row">
       {/* CONVERSATION HISTORY PANEL */}
       <div 
         data-sidebar-alt
+        className={cn(
+          "transition-all duration-300 md:relative",
+          mobileView === 'history' ? "flex w-full" : "hidden md:flex"
+        )}
         style={{
           width: '240px',
           minWidth: '240px',
@@ -223,10 +229,14 @@ export default function StandaloneAITutorPage() {
                 <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border)' }} />
               </div>
               {items.map((item) => (
-                <div 
-                  key={item.id} 
-                  onClick={() => { setActiveTab('chat'); setActiveId(item.id); }} 
-                  style={{
+                  <div 
+                    key={item.id} 
+                    onClick={() => { 
+                      setActiveTab('chat'); 
+                      setActiveId(item.id);
+                      setMobileView('chat');
+                    }} 
+                    style={{
                     padding: '10px 12px',
                     borderRadius: '8px',
                     cursor: 'pointer',
@@ -275,13 +285,53 @@ export default function StandaloneAITutorPage() {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          padding: '12px 20px',
-          gap: '8px',
+          justifyContent: 'space-between',
+          padding: '12px 16px',
           borderBottom: '1px solid var(--border)',
           flexShrink: 0,
-          backgroundColor: 'var(--bg-primary)'
+          backgroundColor: 'var(--bg-primary)',
+          gap: '8px'
         }}>
-          <div style={{
+          {/* Mobile view selector */}
+          <div className="mobile-only" style={{
+            display: 'flex',
+            backgroundColor: 'var(--bg-surface)',
+            borderRadius: '10px',
+            padding: '2px',
+            flex: 1
+          }}>
+            {[
+              { id: 'history', icon: Clock, label: 'Sử' },
+              { id: 'chat', icon: MessageSquare, label: 'Chat' },
+              { id: 'context', icon: Sparkles, label: 'Cảnh' }
+            ].map(v => (
+              <button
+                key={v.id}
+                onClick={() => setMobileView(v.id as any)}
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '4px',
+                  padding: '6px 4px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  background: mobileView === v.id ? 'var(--bg-secondary)' : 'transparent',
+                  color: mobileView === v.id ? '#A855F7' : 'var(--text-secondary)',
+                  boxShadow: mobileView === v.id ? '0 1px 4px rgba(0,0,0,0.1)' : 'none'
+                }}
+              >
+                <v.icon size={12} />
+                {v.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Desktop/Tablet Tab switcher */}
+          <div className="desktop-only" style={{
             display: 'inline-flex',
             backgroundColor: 'var(--bg-surface)',
             border: '1px solid var(--border)',
@@ -331,25 +381,12 @@ export default function StandaloneAITutorPage() {
             >
               <Zap size={15} strokeWidth={2} />
               Agent
-              <span style={{
-                position: 'absolute',
-                top: '-8px',
-                right: '-4px',
-                background: 'linear-gradient(135deg, #7C3AED, #06B6D4)',
-                color: 'white',
-                fontSize: '9px',
-                fontWeight: 800,
-                letterSpacing: '0.05em',
-                padding: '2px 6px',
-                borderRadius: '6px',
-                lineHeight: 1.4
-              }}>NEW</span>
             </button>
           </div>
         </div>
 
         {/* Scrollable content area */}
-        <div data-theme-area="main" style={{ flex: 1, overflowY: 'auto', backgroundColor: 'var(--bg-primary)' }}>
+        <div data-theme-area="main" className={cn("flex-1 overflow-y-auto", mobileView !== 'chat' && "hidden md:block")}>
           {activeTab === 'chat' ? (
             <AITutor 
               key={activeId || 'new'} 
@@ -365,19 +402,24 @@ export default function StandaloneAITutorPage() {
       </main>
 
       {/* RIGHT PANEL */}
-      <div style={{
-        width: '280px',
-        minWidth: '280px',
-        flexShrink: 0,
-        height: '100%',
-        overflowY: 'auto',
-        borderLeft: '1px solid var(--border)',
-        backgroundColor: 'var(--bg-secondary)',
-        padding: '20px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px'
-      }}>
+      <div 
+        className={cn(
+          "transition-all duration-300 md:relative",
+          mobileView === 'context' ? "flex w-full" : "hidden md:flex"
+        )}
+        style={{
+          width: '280px',
+          minWidth: '280px',
+          flexShrink: 0,
+          height: '100%',
+          overflowY: 'auto',
+          borderLeft: '1px solid var(--border)',
+          backgroundColor: 'var(--bg-secondary)',
+          padding: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px'
+        }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{ width: '36px', height: '36px', borderRadius: '10px', backgroundColor: 'rgba(124, 58, 237, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Sparkles size={18} style={{ color: '#7C3AED' }} />

@@ -31,10 +31,8 @@ export default function LoginPage() {
         width: '45%', minHeight: '100vh',
         background: 'linear-gradient(135deg, var(--bg-primary) 0%, #080810 100%)',
         borderRight: '1px solid var(--border)',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
         padding: '60px 48px', position: 'relative', overflow: 'hidden',
-      }} className="hidden lg:flex">
+      }} className="hidden lg:flex flex-col items-center justify-center">
 
         {/* Circuit background */}
         <div style={{

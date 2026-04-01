@@ -19,6 +19,10 @@ interface GlobalContextType {
   toggleTheme: () => void
   language: 'vi' | 'en'
   setLanguage: (lang: 'vi' | 'en') => void
+  
+  // Mobile UI
+  isSidebarOpen: boolean
+  setSidebarOpen: (open: boolean) => void
 }
 
 const GlobalContext = createContext<GlobalContextType | undefined>(undefined)
@@ -30,6 +34,7 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
   const [currentView, setCurrentView] = useState<ViewType>('dashboard')
   const [selectedCourseId, setSelectedCourseId] = useState<string>()
   const [selectedLessonId, setSelectedLessonId] = useState<string>()
+  const [isSidebarOpen, setSidebarOpen] = useState(false)
 
   const isDark = resolvedTheme === 'dark'
   const toggleTheme = () => setTheme(isDark ? 'light' : 'dark')
@@ -44,7 +49,9 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
     isDark,
     toggleTheme,
     language,
-    setLanguage
+    setLanguage,
+    isSidebarOpen,
+    setSidebarOpen
   }
 
   return (

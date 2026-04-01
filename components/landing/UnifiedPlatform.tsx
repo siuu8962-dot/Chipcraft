@@ -14,13 +14,12 @@ function FeatureCard({
   const color = accentColor ?? '#a78bfa'
   return (
     <div
-      className="group relative rounded-2xl border transition-all duration-500 cursor-pointer overflow-hidden"
+      className="group relative rounded-2xl border transition-all duration-500 cursor-pointer overflow-hidden p-6 md:px-7 md:py-6"
       style={{
         animationDelay: delay,
         background: 'rgba(20, 16, 40, 0.8)',
         border: `1px solid rgba(139,92,246,0.2)`,
         backdropFilter: 'blur(16px)',
-        padding: '24px 28px',
       }}
       onMouseEnter={e => {
         const el = e.currentTarget
@@ -131,21 +130,21 @@ export function UnifiedPlatform() {
         position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
         width: '80%', height: 1,
         background: 'linear-gradient(to right, transparent, rgba(167,139,250,0.6), transparent)',
-      }} />
+      }} className="hidden md:block" />
 
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 40px' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 20px' }} className="md:px-10">
 
         {/* Heading */}
-        <div style={{ textAlign: 'center', marginBottom: 80 }}>
+        <div style={{ textAlign: 'center', marginBottom: 48 }} className="md:mb-20">
           <div style={{
-            fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
-            fontFamily: '"DM Mono"', color: '#8B5CF6', marginBottom: 16,
-          }}>
+            fontSize: 10, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
+            fontFamily: '"DM Mono"', color: '#8B5CF6', marginBottom: 12,
+          }} className="md:text-xs">
             Hệ sinh thái
           </div>
           <h2 style={{
-            fontSize: 'clamp(36px, 5vw, 60px)', fontWeight: 900, color: '#FFFFFF',
-            lineHeight: 1.1, letterSpacing: '-0.03em', margin: 0,
+            fontSize: 'clamp(28px, 5vw, 60px)', fontWeight: 900, color: '#FFFFFF',
+            lineHeight: 1.2, letterSpacing: '-0.03em', margin: 0,
           }}>
             Chip bán dẫn{' '}
             <span style={{
@@ -153,7 +152,7 @@ export function UnifiedPlatform() {
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             }}>thế hệ mới</span>
           </h2>
-          <p style={{ marginTop: 20, color: 'rgba(148,163,184,0.6)', fontSize: 15, lineHeight: 1.7, maxWidth: 560, margin: '20px auto 0' }}>
+          <p style={{ marginTop: 16, color: 'rgba(148,163,184,0.6)', fontSize: 14, lineHeight: 1.7, maxWidth: 560, margin: '16px auto 0' }} className="md:text-base">
             Nền tảng đào tạo AI-Native tiên phong, kết nối lộ trình học thuật với môi trường mô phỏng công nghiệp.
           </p>
         </div>
@@ -161,13 +160,12 @@ export function UnifiedPlatform() {
         {/* ─── SIDE BY SIDE LAYOUT ─── */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1fr auto 1fr',
-          gap: '0 40px',
+          gap: '40px',
           alignItems: 'center',
-        }}>
+        }} className="grid-cols-1 lg:grid-cols-[1fr_auto_1fr]">
 
           {/* LEFT: 2x2 Feature Cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div style={{ display: 'grid', gap: 16 }} className="grid-cols-1 md:grid-cols-2">
             <FeatureCard
               delay="0s"
               title="Khóa học"
@@ -199,7 +197,7 @@ export function UnifiedPlatform() {
           </div>
 
           {/* CENTER: SVG connector lines */}
-          <div style={{ width: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', height: 340 }}>
+          <div style={{ width: 120, alignItems: 'center', justifyContent: 'center', position: 'relative', height: 340 }} className="hidden lg:flex">
             <svg width="120" height="340" viewBox="0 0 120 340" fill="none" style={{ overflow: 'visible', imageRendering: 'crisp-edges' }}>
               {/* 4 connection lines from cards (left) to chip (right) */}
               {[60, 130, 210, 280].map((y, i) => (
@@ -218,7 +216,7 @@ export function UnifiedPlatform() {
           </div>
 
           {/* RIGHT: AI Chip */}
-          <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', position: 'relative' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }} className="lg:justify-start">
 
             {/* Floating spec boxes */}
             <SpecBox label="Compute Unit" value="1.2 PETAFLOPS" position={{ top: -20, right: -10 }} />
@@ -237,7 +235,7 @@ export function UnifiedPlatform() {
             <div style={{
               width: 280, height: 280, position: 'relative',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
+            }} className="scale-90 md:scale-100">
               {/* Circuit SVG background */}
               <svg width="280" height="280" viewBox="0 0 280 280" fill="none" style={{ position: 'absolute', inset: 0, imageRendering: 'crisp-edges' }}>
                 <defs>

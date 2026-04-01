@@ -145,43 +145,43 @@ export function AITutor({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '14px 20px',
+        padding: '10px 16px',
         borderBottom: '1px solid var(--border)',
         flexShrink: 0,
         backgroundColor: 'var(--bg-secondary)'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      }} className="md:px-5 md:py-3">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="md:gap-3">
           {/* Avatar with status dot */}
           <div style={{ position: 'relative' }}>
             <div style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '12px',
+              width: '32px',
+              height: '32px',
+              borderRadius: '10px',
               background: 'linear-gradient(135deg, #7C3AED, #06B6D4)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#FFF'
-            }}>
-              <Zap size={20} fill="white" />
+            }} className="md:w-10 md:h-10">
+              <Zap size={16} fill="white" className="md:w-5 md:h-5" />
             </div>
             <div style={{
               position: 'absolute',
-              bottom: '-2px',
-              right: '-2px',
-              width: '10px',
-              height: '10px',
+              bottom: '-1px',
+              right: '-1px',
+              width: '8px',
+              height: '8px',
               borderRadius: '50%',
               backgroundColor: '#10B981',
               border: '2px solid var(--bg-secondary)'
             }} />
           </div>
 
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
-              <span style={{ fontSize: '15px', fontWeight: 700, color: 'var(--text-primary)' }}>AI Chip Tutor</span>
-              <span style={{
-                fontSize: '11px',
+          <div style={{ minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '1px' }}>
+              <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }} className="md:text-base">AI Chip Tutor</span>
+              <span className="desktop-only" style={{
+                fontSize: '10px',
                 fontWeight: 600,
                 color: 'var(--success)',
                 backgroundColor: 'rgba(16,185,129,0.12)',
@@ -191,8 +191,8 @@ export function AITutor({
                 letterSpacing: '0.04em'
               }}>TRỰC TUYẾN</span>
             </div>
-            <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-              Gemini 2.5 Flash · Chuyên gia Logic & RTL
+            <div style={{ fontSize: '11px', color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} className="md:text-xs">
+              Gemini 2.5 Flash · Chuyên gia RTL
             </div>
           </div>
         </div>
@@ -200,8 +200,8 @@ export function AITutor({
         <div style={{ display: 'flex', gap: '4px' }}>
           {[Settings, MoreHorizontal].map((Icon, i) => (
             <button key={i} style={{
-              width: '34px',
-              height: '34px',
+              width: '32px',
+              height: '32px',
               borderRadius: '8px',
               border: 'none',
               backgroundColor: 'transparent',
@@ -212,8 +212,6 @@ export function AITutor({
               justifyContent: 'center',
               transition: 'all 0.15s'
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-hover)'; e.currentTarget.style.color = 'var(--text-primary)' }}
-            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--text-muted)' }}
             >
               <Icon size={16} strokeWidth={2} />
             </button>
@@ -225,19 +223,19 @@ export function AITutor({
       <div style={{
         flex: 1,
         overflowY: 'auto',
-        padding: '20px',
+        padding: '16px',
         display: 'flex',
         flexDirection: 'column',
         gap: '4px',
         scrollbarWidth: 'thin',
         scrollbarColor: 'var(--accent) transparent'
-      }}>
+      }} className="md:p-5">
         {messages.length === 0 && (
-          <div style={{ textAlign: 'center', padding: '60px 20px', opacity: 0.5 }}>
-            <div style={{ width: '64px', height: '64px', borderRadius: '50%', border: '2px dashed var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
-              <Bot size={32} />
+          <div style={{ textAlign: 'center', padding: '40px 16px', opacity: 0.5 }}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '50%', border: '2px dashed var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+              <Bot size={24} />
             </div>
-            <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Chào mừng bạn đến với AI Tutor! Hãy đặt câu hỏi để bắt đầu.</p>
+            <p style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>Chào mừng bạn đến với AI Tutor!</p>
           </div>
         )}
 
@@ -248,20 +246,19 @@ export function AITutor({
               display: 'flex',
               justifyContent: 'flex-end',
               marginBottom: '16px',
-              paddingLeft: '20%'
-            }}>
+            }} className="pl-8 md:pl-[20%]">
               <div style={{
                 backgroundColor: 'var(--accent)',
                 background: 'linear-gradient(135deg, var(--accent), var(--accent-hover))',
                 color: '#FFF',
-                padding: '12px 16px',
-                borderRadius: '18px 18px 4px 18px',
+                padding: '10px 14px',
+                borderRadius: '16px 16px 4px 16px',
                 fontSize: '14px',
                 lineHeight: '1.6',
                 maxWidth: '100%',
                 wordBreak: 'break-word',
                 boxShadow: 'var(--accent-glow)'
-              }}>
+              }} className="md:px-4 md:py-3">
                 {m.content}
               </div>
             </div>
@@ -269,35 +266,34 @@ export function AITutor({
             /* Assistant message bubble */
             <div key={m.id} style={{
               display: 'flex',
-              gap: '12px',
+              gap: '10px',
               marginBottom: '16px',
-              paddingRight: '10%'
-            }}>
+            }} className="pr-4 md:pr-[10%] md:gap-3">
               <div style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '10px',
+                width: '32px',
+                height: '32px',
+                borderRadius: '8px',
                 background: 'linear-gradient(135deg, #7C3AED, #06B6D4)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexShrink: 0,
                 color: '#FFF'
-              }}>
-                <Zap size={18} fill="white" />
+              }} className="md:w-9 md:h-9">
+                <Zap size={16} fill="white" className="md:w-5 md:h-5" />
               </div>
 
               <div style={{
                 backgroundColor: 'var(--bg-tertiary)',
                 border: '1px solid var(--border)',
                 color: 'var(--text-primary)',
-                padding: '14px 18px',
-                borderRadius: '4px 18px 18px 18px',
+                padding: '12px 14px',
+                borderRadius: '4px 16px 16px 16px',
                 fontSize: '14px',
                 lineHeight: '1.7',
                 flex: 1,
                 wordBreak: 'break-word'
-              }}>
+              }} className="md:px-5 md:py-4">
                 <MarkdownRenderer content={normalizeAgentResponse(m.content)} />
               </div>
             </div>

@@ -94,86 +94,87 @@ export default function AchievementsPage() {
 
   return (
     <div style={{ 
-      padding: '32px', 
+      padding: '16px', 
       maxWidth: 1200, 
       margin: '0 auto', 
       minHeight: '100vh', 
       backgroundColor: 'var(--bg-primary)',
-      fontFamily: 'var(--font-be-vietnam), sans-serif'
-    }}>
+      fontFamily: 'var(--font-be-vietnam), sans-serif',
+    }} className="md:p-8">
       
       {/* Header Section */}
-      <div style={{ marginBottom: 40, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+      <div style={{ marginBottom: 24, display: 'flex', flexDirection: 'column', gap: 16 }} className="md:mb-10 md:flex-row md:justify-between md:items-end">
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#8B5CF6', marginBottom: 8 }}>
-            <Award size={18} />
-            <span style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Thành tích cá nhân</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: '#8B5CF6', marginBottom: 4 }} className="md:gap-2 md:mb-2">
+            <Award size={16} className="md:w-5 md:h-5" />
+            <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }} className="md:text-xs">Thành tích cá nhân</span>
           </div>
-          <h1 style={{ fontSize: 32, fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>Thành tích & Huy hiệu</h1>
+          <h1 style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }} className="md:text-3xl">Thành tích & Huy hiệu</h1>
         </div>
         
-        <div style={{ display: 'flex', gap: 12 }}>
-          <div style={{ position: 'relative' }}>
-            <Search size={18} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+        <div style={{ display: 'flex', gap: 12, width: '100%' }} className="md:w-auto">
+          <div style={{ position: 'relative', flex: 1 }} className="md:flex-none">
+            <Search size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
             <input 
               type="text" 
-              placeholder="Tìm tên huy hiệu..."
+              placeholder="Tìm huy hiệu..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
-                height: 44, padding: '0 16px 0 40px', borderRadius: 12,
+                height: 40, padding: '0 12px 0 36px', borderRadius: 10,
                 background: 'var(--bg-surface)', border: '1px solid var(--border)',
-                color: 'var(--text-primary)', fontSize: 14, width: 240,
+                color: 'var(--text-primary)', fontSize: 13, width: '100%',
                 outline: 'none', transition: 'all 0.2s'
-              }}
+              }} className="md:w-60 md:h-11 md:px-10"
             />
           </div>
         </div>
       </div>
 
-      {/* Stats Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20, marginBottom: 40 }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 md:mb-10">
         {stats.map((stat, i) => (
-          <div key={i} className="card-redesign" style={{ padding: 24, display: 'flex', alignItems: 'center', gap: 20 }}>
+          <div key={i} className="card-redesign p-4 gap-4 md:p-6 md:gap-5 flex items-center">
             <div style={{ 
-              width: 52, height: 52, borderRadius: 14, 
+              width: 44, height: 44, borderRadius: 12, 
               background: `${stat.color}15`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               color: stat.color, flexShrink: 0
-            }}>
-              <stat.icon size={28} />
+            }} className="md:w-13 md:h-13 md:rounded-14">
+              <stat.icon size={22} className="md:w-7 md:h-7" />
             </div>
             <div>
-              <div style={{ fontSize: 12, color: 'var(--text-muted)', fontWeight: 600, marginBottom: 4 }}>{stat.label}</div>
-              <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1 }}>{stat.value}</div>
+              <div style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, marginBottom: 2 }}>{stat.label}</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1 }} className="md:text-2xl">{stat.value}</div>
             </div>
           </div>
         ))}
       </div>
 
       {/* Badges Section */}
-      <div style={{ display: 'flex', gap: 32, alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }} className="flex-col lg:flex-row md:gap-8">
         
         {/* Left Sidebar Filters */}
-        <div style={{ width: 200, flexShrink: 0, position: 'sticky', top: 32, display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12, paddingLeft: 16 }}>Thể loại</div>
-          {categories.map(cat => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveTab(cat.id)}
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                padding: '12px 16px', borderRadius: 10, border: 'none',
-                background: activeTab === cat.id ? 'rgba(139, 92, 246, 0.1)' : 'transparent',
-                color: activeTab === cat.id ? '#8B5CF6' : 'var(--text-secondary)',
-                fontSize: 14, fontWeight: 600, cursor: 'pointer', textAlign: 'left',
-                transition: 'all 0.2s'
-              }}
-            >
-              {cat.label}
-              {activeTab === cat.id && <ChevronRight size={16} />}
-            </button>
-          ))}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, width: '100%' }} className="lg:w-48 lg:sticky lg:top-24">
+          <div style={{ fontSize: 10, fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8, paddingLeft: 12 }}>Thể loại</div>
+          <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 8 }} className="lg:flex-col lg:overflow-visible lg:p-0">
+            {categories.map(cat => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveTab(cat.id)}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  padding: '10px 14px', borderRadius: 10, border: 'none',
+                  background: activeTab === cat.id ? 'rgba(139, 92, 246, 0.1)' : 'transparent',
+                  color: activeTab === cat.id ? '#8B5CF6' : 'var(--text-secondary)',
+                  fontSize: 13, fontWeight: 600, cursor: 'pointer', textAlign: 'left',
+                  transition: 'all 0.2s', whiteSpace: 'nowrap'
+                }} className="md:px-4 md:py-3 md:text-sm"
+              >
+                {cat.label}
+                {activeTab === cat.id && <ChevronRight size={14} className="desktop-only" />}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Badges Grid */}

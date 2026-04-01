@@ -49,39 +49,45 @@ export default function DashboardClient({ user, profile, courses = [], enrollmen
   const strokeDashoffset = CIRCUMFERENCE - (progressPercent / 100) * CIRCUMFERENCE
 
   return (
-    <div data-theme-area="main" style={{ padding: '24px 32px', maxWidth: 1200, margin: '0 auto', backgroundColor: 'var(--bg-primary)', minHeight: '100vh' }}>
+    <div data-theme-area="main" style={{ 
+      padding: '16px', 
+      maxWidth: 1200, 
+      margin: '0 auto', 
+      backgroundColor: 'var(--bg-primary)', 
+      minHeight: '100vh' 
+    }} className="md:p-8">
       
       {/* ── GREETING SECTION ── */}
       <div className="page-header" style={{ marginBottom: 24 }}>
         <p style={{ 
-          fontSize: 10.5, fontWeight: 700, letterSpacing: '0.12em', 
+          fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', 
           color: '#7C3AED', textTransform: 'uppercase', marginBottom: 6 
         }}>
           {today}
         </p>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 4 }}>
           <div style={{
-            width: 36, height: 36,
+            width: 32, height: 32,
             background: 'rgba(124, 58, 237, 0.15)',
-            borderRadius: 10,
+            borderRadius: 8,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0
           }}>
-            <Lightbulb size={20} color="#7C3AED" />
+            <Lightbulb size={18} color="#7C3AED" />
           </div>
-          <h1 style={{ margin: 0, fontSize: 24, fontWeight: 700, color: 'var(--text-primary)' }}>
-            Chúc {greeting}, {profile?.full_name?.split(' ').pop() || 'bạn'}!
+          <h1 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: 'var(--text-primary)' }} className="md:text-2xl">
+            Chào {greeting}, {profile?.full_name?.split(' ').pop() || 'bạn'}!
           </h1>
         </div>
-        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: 14 }}>
+        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: 13 }} className="md:text-sm">
           Bắt đầu hành trình thiết kế chip của bạn hôm nay.
         </p>
       </div>
 
       {/* ── STATS GRID ── */}
-      <div style={{ 
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', 
-        gap: 16, marginBottom: 20 
-      }}>
+      <div 
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5"
+      >
         <StatCard 
           label="Tổng XP" 
           value={stats.totalXP} 
@@ -125,34 +131,33 @@ export default function DashboardClient({ user, profile, courses = [], enrollmen
         backgroundColor: 'var(--bg-tertiary)',
         border: '1px solid var(--border)',
         borderRadius: '16px',
-        padding: '16px 20px',
+        padding: '12px 16px',
         display: 'flex',
         alignItems: 'center',
-        gap: '16px',
+        gap: '12px',
         marginBottom: 20
-      }}>
+      }} className="md:p-5">
         <div style={{
-          width: '36px', height: '36px',
+          width: '32px', height: '32px',
           borderRadius: '50%',
           background: 'linear-gradient(135deg, #7C3AED, #A855F7)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '15px', fontWeight: 800, color: 'white',
+          fontSize: '14px', fontWeight: 800, color: 'white',
           flexShrink: 0,
-          boxShadow: '0 0 12px rgba(124, 58, 237, 0.2)'
-        }}>
+        }} className="md:w-9 md:h-9 md:text-base">
           {stats.level}
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-            <span style={{ fontSize:'13px', fontWeight:600, color:'var(--text-primary)' }}>
+            <span style={{ fontSize:'12px', fontWeight:600, color:'var(--text-primary)' }} className="md:text-sm">
               Tiến trình Cấp độ {stats.level}
             </span>
-            <span style={{ fontSize:'13px', color:'#7C3AED', fontWeight:700 }}>
+            <span style={{ fontSize:'12px', color:'#7C3AED', fontWeight:700 }} className="md:text-sm">
               {stats.levelXP} / {stats.nextLevelXP} XP
             </span>
           </div>
           <div style={{
-            height: '8px',
+            height: '6px',
             backgroundColor: 'var(--border)',
             borderRadius: '4px',
             overflow: 'hidden'
@@ -169,10 +174,7 @@ export default function DashboardClient({ user, profile, courses = [], enrollmen
       </div>
 
       {/* ── MAIN CONTENT AREA ── */}
-      <div style={{ 
-        display: 'grid', gridTemplateColumns: '1fr 320px', 
-        gap: 16, marginBottom: 16 
-      }}>
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4 mb-4">
         
         {/* LEFT: Currently Learning & Suggested Courses */}
         <div data-theme-area="card" className="card-redesign" style={{ padding: 24, backgroundColor: 'var(--bg-tertiary)' }}>

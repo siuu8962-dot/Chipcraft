@@ -11,22 +11,22 @@ export default function TermsPage() {
         position: 'fixed', top: 0, left: 0, right: 0, height: 64,
         background: 'rgba(5,5,8,0.9)', backdropFilter: 'blur(16px)',
         borderBottom: '1px solid var(--border)',
-        display: 'flex', alignItems: 'center', padding: '0 40px', zIndex: 50,
-      }}>
+        display: 'flex', alignItems: 'center', zIndex: 50,
+      }} className="px-5 md:px-10">
         <Link href="/" style={{ fontFamily: '"DM Mono"', fontWeight: 700, fontSize: 18, color: '#E2E8F0', textDecoration: 'none' }}>
            ChipCraft
         </Link>
       </div>
 
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '104px 40px 80px' }}>
+      <div style={{ maxWidth: 760, margin: '0 auto' }} className="px-5 pt-28 pb-20 md:px-10 md:pt-32">
         <div style={{ marginBottom: 48 }}>
           <div style={{ fontFamily: '"DM Mono"', fontSize: 11, color: '#00D4B4', letterSpacing: '0.1em', marginBottom: 12 }}>
             CẬP NHẬT LẦN CUỐI: 17/03/2025
           </div>
-          <h1 style={{ fontFamily: '"Be Vietnam Pro"', fontWeight: 800, fontSize: 44, color: '#FFFFFF', letterSpacing: '-0.02em', marginBottom: 16 }}>
+          <h1 style={{ fontFamily: '"Be Vietnam Pro"', fontWeight: 800, fontSize: 'clamp(32px, 5vw, 44px)', color: '#FFFFFF', letterSpacing: '-0.02em', marginBottom: 16 }}>
             Điều khoản dịch vụ
           </h1>
-          <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.7 }}>
+          <p style={{ fontSize: 'clamp(15px, 2vw, 17px)', color: 'var(--text-muted)', lineHeight: 1.7 }}>
             Vui lòng đọc kỹ các điều khoản này trước khi sử dụng nền tảng ChipCraft.
             Bằng cách truy cập hoặc sử dụng dịch vụ, bạn đồng ý bị ràng buộc bởi các điều khoản sau.
           </p>

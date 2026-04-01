@@ -18,27 +18,34 @@ export default async function DashboardLayout({ children }: { children: React.Re
       backgroundColor: 'var(--bg-primary)',
       position: 'relative'
     }}>
-      {/* Sidebar - fixed width, scrollable itself if needed */}
+      {/* Sidebar - Shared Client Drawer */}
       <Sidebar user={user} profile={profile} />
 
-      {/* Main Area - takes remaining space and scrolls page-wide */}
-      <div style={{
-        flex: 1,
-        minWidth: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
-        backgroundColor: 'var(--bg-primary)'
-      }}>
-        <Topbar user={user} profile={profile} />
-        <main data-theme-area="main" style={{
+      {/* Main Area */}
+      <div 
+        className="flex-1 min-w-0 flex flex-col min-h-screen bg-[var(--bg-primary)] transition-all duration-300"
+        style={{
+          marginLeft: '0px', // Default mobile
+        }}
+      >
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
           flex: 1,
           width: '100%',
-          position: 'relative',
-          backgroundColor: 'var(--bg-primary)'
-        }}>
-          {children}
-        </main>
+          // On desktop, add padding-left to clear the fixed sidebar
+          paddingLeft: '0px',
+        }} className="md:pl-[210px]">
+          <Topbar user={user} profile={profile} />
+          <main data-theme-area="main" style={{
+            flex: 1,
+            width: '100%',
+            position: 'relative',
+            backgroundColor: 'var(--bg-primary)'
+          }}>
+            {children}
+          </main>
+        </div>
       </div>
     </div>
   )

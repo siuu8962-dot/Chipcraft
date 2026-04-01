@@ -74,6 +74,34 @@ body {
 }
 
 
+/* --- Responsive Helpers --- */
+:root {
+  --sidebar-width: 210px;
+  --header-height: 56px;
+  --mobile-breakpoint: 768px;
+  --tablet-breakpoint: 1024px;
+}
+
+@media (max-width: 768px) {
+  .desktop-only { display: none !important; }
+}
+@media (min-width: 769px) {
+  .mobile-only { display: none !important; }
+}
+
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 12px;
+  }
+}
+
 /* --- Toast Redesign --- */
 .chip-toast {
   background: rgba(15, 23, 42, 0.9) !important;
@@ -86,7 +114,7 @@ body {
   font-size: 14px !important;
   font-weight: 600 !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
-  max-width: 400px !important;
+  max-width: calc(100vw - 32px) !important;
 }
 
 .chip-toast-success { border-left: 4px solid #10B981 !important; }
